@@ -1,42 +1,38 @@
-import React from "react";
+import Icon from './Icon.jsx'
+import SectionHeading from './SectionHeading.jsx'
+import { about, profile } from '../data/profile.js'
 
-function About() {
+export default function About() {
   return (
-    <>
-      <header>
-        <h1 id="name">João Vitor de Medeiros</h1>
-        <p id="title">
-          <span className="highlight">Pouco sobre mim!</span>
-        </p>
-      </header>
-
-      <section>
-        <p className="description">
-          Desenvolvedor FullStack na Vexur, estudante de Tecnologia para Sistemas de Internet no Instituto Federal do Paraná.
-          Comecei na informática como técnico aos 17 anos, com 4 anos de experiência técnica que despertaram meu interesse por programação.
-        </p>
-        <p className="description">
-          Atualmente trabalho como desenvolvedor FullStack na Vexur, onde adquiro experiência prática e aprendizado constante.
-        </p>
-      </section>
-
-      <section className="skills-box">
-        <h3 className="skills-title">Meus Conhecimentos</h3>
-        <ul className="skills-list">
-          {[
-            "HTML5", "CSS3", "JavaScript", "TypeScript", "Python", "Node.js", "Express.js",
-            "React", "Vue.js", "MongoDB", "MySQL", "PostgreSQL", "Git", "GitHub", "Linux",
-            "NPM", "Sequelize", "Neo4j",
-          ].map((tech) => (
-            <li key={tech}>
-              <i className={`devicon-${tech.toLowerCase().replace(/\./g, '').replace(/\s/g, '')}-plain colored`}></i>
-              <span>{tech}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </>
-  );
+    <section id="sobre" className="section">
+      <div className="container">
+        <SectionHeading index="02" eyebrow="Sobre mim" title="Minha trajetória profissional" />
+        <div className="about">
+          <div className="about__text" data-reveal>
+            {about.paragraphs.map((paragraph, i) => (
+              <p key={i} className={i === 0 ? 'about__lead' : undefined}>
+                {paragraph}
+              </p>
+            ))}
+            <p className="about__meta">
+              <Icon name="pin" size={16} /> {profile.location}
+            </p>
+          </div>
+          <ul className="focus-list">
+            {about.focus.map((item) => (
+              <li key={item.title} className="focus-card" data-reveal>
+                <span className="focus-card__icon">
+                  <Icon name={item.icon} size={22} />
+                </span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )
 }
-
-export default About;
